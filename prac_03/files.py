@@ -27,4 +27,4 @@ accumulation_of_all_numbers = 0
 for line in in_file:
     accumulation_of_all_numbers += int(line.strip())
 print(accumulation_of_all_numbers)
-
+in_file.close()
