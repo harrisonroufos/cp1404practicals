@@ -11,13 +11,13 @@ NUMBERS_PER_LINE = 6
 
 def main():
     """Prints quick picks numbers in ascending order"""
-    picks = []
+    numbers = []
     number_of_picks = int(input("How many quick picks? "))
     for pick in range(number_of_picks):
-        picks.append(generate_quick_pick_numbers(MIN_NUMBER, MAX_NUMBER, NUMBERS_PER_LINE))
-    picks.sort(key=itemgetter(-1))
-    for pick in picks:
-        for part in pick:
+        numbers.append(generate_quick_pick_numbers(MIN_NUMBER, MAX_NUMBER, NUMBERS_PER_LINE))
+    numbers.sort(key=itemgetter(-1))
+    for number in numbers:
+        for part in number:
             print(f"{part:2}", end=" ")
         print("")
 
