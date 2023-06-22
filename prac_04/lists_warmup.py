@@ -1,3 +1,6 @@
+"""
+CP1404 Practical
+"""
 numbers = [3, 1, 4, 1, 5, 9, 2]
 # numbers[0] is 3
 # numbers[-1] is 2
