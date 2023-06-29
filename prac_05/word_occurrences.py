@@ -18,7 +18,6 @@ for word in words:
     if len(word) > max_length:
         max_length = len(word)
 
-print(max_length)
 
 for word, count in word_to_count.items():
     print(f"{word:{max_length}} : {count}")
