@@ -7,7 +7,7 @@ Actual:   22 minutes
 email_to_name = {}
 email = input("Email: ")
 while email != "":
-    email_and_name_pair = email.split("@")  # change variable name
+    email_and_name_pair = email.split("@")
     is_name = input(f"Is your name {email_and_name_pair[0]}? (Y/n) ").upper()
     if is_name == "Y":
         email_to_name[email] = email_and_name_pair[0]
