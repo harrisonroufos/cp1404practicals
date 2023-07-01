@@ -13,23 +13,25 @@ def main():
     champion_to_number_of_wins = {}
     champions = []
     countries = []
-    generate_list_of_item_from_file(FILE, champions, 2)
-    generate_list_of_item_from_file(FILE, countries, 1)
+    in_file = open(FILE, "r", encoding="utf-8-sig")
+    in_file.readline()
+    file_content = in_file.read().split("\n")
+    generate_list_of_item_from_index(file_content, champions, 2)
+    generate_list_of_item_from_index(file_content, countries, 1)
     generate_dictionary_of_champion_to_number_of_wins(champions, champion_to_number_of_wins)
     print("Wimbledon Champions:")
     print_champions_and_number_of_wins(champion_to_number_of_wins)
     print("")
     print("These 12 countries have won Wimbledon:")
     print(", ".join(sorted({country for country in countries})))
+    in_file.close()
 
 
-def generate_list_of_item_from_file(filename, out_list, index_of_line_part):
+def generate_list_of_item_from_index(file_content, out_list, index_of_line_part):
     """Generate a list of item from file from same given index"""
-    with open(filename, "r", encoding="utf-8-sig") as in_file:
-        in_file.readline()
-        for line in in_file:
-            data = line.split(",")
-            out_list.append(data[index_of_line_part])
+    for line in file_content:
+        data = line.split(",")
+        out_list.append(data[index_of_line_part])
 
 
 def generate_dictionary_of_champion_to_number_of_wins(champions, champion_to_number_of_wins):
