@@ -19,4 +19,7 @@ programming_languages_data = [ProgrammingLanguage("Python", "Dynamic", True, 199
                               ProgrammingLanguage("Ruby", "Dynamic", True, 1995),
                               ProgrammingLanguage("Visual Basic", "Static", False, 1991)]
 
-
+print("The dynamically typed languages are:")
+for language in programming_languages_data:
+    if language.is_dynamic():
+        print(language.name)
