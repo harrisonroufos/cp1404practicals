@@ -2,7 +2,7 @@
 CP1404 Practical
 ProgrammingLanguage class
 Estimate: 25 minutes
-Actual:
+Actual:   40 minutes
 """
 
 
