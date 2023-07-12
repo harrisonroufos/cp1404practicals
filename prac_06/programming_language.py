@@ -9,7 +9,7 @@ Actual:
 class ProgrammingLanguage:
     """Represent a ProgrammingLanguage object"""
 
-    def __init__(self, name="", type="", reflection=True, year=0):
+    def __init__(self, name="", typing="", reflection=True, year=0):
         """Initialise a ProgrammingLanguage instance.
         name: name of programming language
         type: if is typed dynamically or static
@@ -17,16 +17,14 @@ class ProgrammingLanguage:
         year: integer, year language was created
         """
         self.name = name
-        self.type = type
+        self.typing = typing
         self.reflection = reflection
         self.year = year
 
     def is_dynamic(self):
         """Determines True or False to language being dynamically typed
         if False language is Statically typed"""
-        if self.type.lower() == "dynamic":
+        if self.typing.lower() == "dynamic":
             return True
         else:
             return False
-
-
