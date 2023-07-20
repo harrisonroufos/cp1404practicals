@@ -3,8 +3,8 @@ CP1404 Practical
 my guitars
 """
 
-from prac_06.guitar import Guitar
 import csv
+from prac_06.guitar import Guitar
 
 FILE_NAME = "guitars.csv"
 
