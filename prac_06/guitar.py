@@ -20,7 +20,7 @@ class Guitar:
         self.year = year
         self.cost = cost
 
-    def __str__(self):
+    def __repr__(self):
         """Return string representation of name, (year made) and cost of a guitar"""
         return f"{self.name} ({self.year}) : ${self.cost:,.2f}"
 
