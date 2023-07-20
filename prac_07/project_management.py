@@ -7,11 +7,12 @@ Actual:
 
 from project import Project
 
-FILE_NAME = "project.txt"
+IN_FILE = "project.txt"
+OUT_FILE = "test.txt"
 
 projects = []
-in_file = open(FILE_NAME, "r")
-in_file.readline()
+in_file = open(IN_FILE, "r")
+header = in_file.readline()
 
 for line in in_file:
     parts = line.strip().split("\t")
@@ -21,3 +22,9 @@ for project in projects:
     print(project)
 
 in_file.close()
+
+out_file = open(OUT_FILE, "w")
+print(header.strip("\n"), file=out_file)
+for project in projects:
+    print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate:.1f}\t{project.completion_percentage}", file=out_file)
+out_file.close()
