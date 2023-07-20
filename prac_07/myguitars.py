@@ -14,5 +14,7 @@ reader = csv.reader(in_file)
 for line in reader:
     guitars.append(Guitar([line[0]], int(line[1]), float(line[2])))
 
+guitars.sort()
+
 for guitar in guitars:
     print(guitar)
