@@ -5,9 +5,10 @@ Estimate: 120 minutes
 Actual:
 """
 
+import datetime
 from project import Project
 
-MENU = "(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by da\n(A)dd new project\n(U)pdate project\n(Q)uit"
+MENU = "(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by date\n(A)dd new project\n(U)pdate project\n(Q)uit"
 IN_FILE = "project.txt"
 OUT_FILE = "test.txt"
 
@@ -22,11 +23,22 @@ def main():
             save_to_file(header, projects)
         elif choice == "d":
             display_projects(projects)
+        elif choice == "f":
+            display_filtered_by_date_projects(projects)
         else:
             print("Invalid")
         print(MENU)
         choice = input(">>> ").lower()
     save_to_file(header, projects)
+
+
+def display_filtered_by_date_projects(projects):
+    date_string = input("Show projects that start after date (dd/mm/yy): ")  # e.g., "30/9/2022"
+    date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+    projects_after_date = [project for project in projects if
+                           datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date() > date]
+    for project_after_date in projects_after_date:
+        print(project_after_date)
 
 
 def load_file():
