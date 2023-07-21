@@ -20,3 +20,7 @@ class Project:
     def __repr__(self):
         """String representation of Project showing, name, start date, priority, cost estimate, completion percentage"""
         return f"{self.name}, start: {self.start_date}, priority {self.priority}, estimate: ${self.cost_estimate:.2f}, completion: {self.completion_percentage}%"
+
+    def __lt__(self, other):
+        """Returns if one Project priority is less than another Projects priority"""
+        return self.priority < other.priority

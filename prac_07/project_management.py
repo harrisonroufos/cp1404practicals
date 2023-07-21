@@ -20,6 +20,8 @@ def main():
             header, projects = load_file()  # header is for when saving to file for first line
         elif choice == "s":
             save_to_file(header, projects)
+        elif choice == "d":
+            display_projects(projects)
         else:
             print("Invalid")
         print(MENU)
@@ -50,6 +52,18 @@ def save_to_file(header, projects):
             file=out_file)
     out_file.close()
     print(f"Saved to {file_name}.")
+
+
+def display_projects(projects):
+    projects.sort()
+    print("Incomplete projects:")
+    incomplete_projects = [project for project in projects if project.completion_percentage < 100]
+    for incomplete_project in incomplete_projects:
+        print(incomplete_project)
+    completed_projects = [project for project in projects if project.completion_percentage >= 100]
+    print("Completed projects:")
+    for completed_project in completed_projects:
+        print(completed_project)
 
 
 main()
