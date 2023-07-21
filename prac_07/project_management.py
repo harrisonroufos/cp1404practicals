@@ -27,11 +27,23 @@ def main():
             display_filtered_by_date_projects(projects)
         elif choice == "a":
             add_project(projects)
+        elif choice == "u":
+            update_project(projects)
         else:
             print("Invalid")
         print(MENU)
         choice = input(">>> ").lower()
     save_to_file(header, projects)
+
+
+def update_project(projects):
+    for i, project in enumerate(projects):
+        print(i, project)
+    project_choice = int(input("Project choice: "))
+    new_percentage = int(input("New Percentage: "))
+    new_priority = int(input("New Priority: "))
+    projects[project_choice].completion_percentage = new_percentage
+    projects[project_choice].priority = new_priority
 
 
 def add_project(projects):
