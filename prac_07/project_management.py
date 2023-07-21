@@ -8,7 +8,9 @@ Actual:
 import datetime
 from project import Project
 
-MENU = "(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by date\n(A)dd new project\n(U)pdate project\n(Q)uit"
+MENU = """(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by date
+(A)dd new project\n(U)pdate project\n(Q)uit"""
+
 FILE_HEADER = "Name\tStart Date	Priority\tCost Estimate\tCompletion Percentage"
 
 
@@ -94,7 +96,7 @@ def add_project():
     priority = int(input("Priority: "))
     cost_estimate = float(input("Cost estimate: $"))
     percentage_complete = int(input("Percent complete: "))
-    project = Project(name, start_date_string, priority, cost_estimate, percentage_complete)
+    project = Project(name, str(start_date), priority, cost_estimate, percentage_complete)
     return project
 
 
@@ -105,6 +107,7 @@ def display_filtered_by_date_projects(projects):
         date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
         projects_after_date = [project for project in projects if
                                datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date() > date]
+        projects_after_date.sort()
         for project_after_date in projects_after_date:
             print(project_after_date)
     except ValueError:
@@ -127,15 +130,18 @@ def load_file():
 
 def save_to_file(projects):
     """Save projects to file"""
-    file_name = input("File name to save to: ")
-    out_file = open(file_name, "w")
-    print(FILE_HEADER, file=out_file)
-    for project in projects:
-        print(
-            f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate:.1f}\t{project.completion_percentage}",
-            file=out_file)
-    out_file.close()
-    print(f"Saved to {file_name}.")
+    try:
+        file_name = input("File name to save to: ")
+        out_file = open(file_name, "w")
+        print(FILE_HEADER, file=out_file)
+        for project in projects:
+            print(
+                f"""{project.name}\t{project.start_date}\t{project.priority}\t
+                {project.cost_estimate:.1f}\t{project.completion_percentage}""", file=out_file)
+        out_file.close()
+        print(f"Saved to {file_name}.")
+    except FileNotFoundError:
+        print("File not found.")
 
 
 def display_projects(projects):
