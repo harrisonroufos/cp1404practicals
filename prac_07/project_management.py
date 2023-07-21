@@ -18,18 +18,30 @@ def main():
     choice = input(">>> ").lower()
     while choice != "q":
         if choice == "l":
-            header, projects = load_file()  # header is for when saving to file for first line
+            header, projects = load_file()
         elif choice == "s":
             save_to_file(header, projects)
         elif choice == "d":
             display_projects(projects)
         elif choice == "f":
             display_filtered_by_date_projects(projects)
+        elif choice == "a":
+            add_project(projects)
         else:
             print("Invalid")
         print(MENU)
         choice = input(">>> ").lower()
     save_to_file(header, projects)
+
+
+def add_project(projects):
+    print("Let's add a new project")
+    name = input("Name: ")
+    start_date = input("Start date (dd/mm/yy): ")
+    priority = int(input("Priority: "))
+    cost_estimate = float(input("Cost estimate: $"))
+    percentage_complete = int(input("Percent complete: "))
+    projects.append(Project(name, start_date, priority, cost_estimate, percentage_complete))
 
 
 def display_filtered_by_date_projects(projects):
