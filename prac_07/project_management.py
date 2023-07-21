@@ -18,7 +18,10 @@ def main():
     choice = input(">>> ").lower()
     while choice != "q":
         if choice == "l":
-            header, projects = load_file()
+            try:
+                header, projects = load_file()
+            except FileNotFoundError:
+                print("File not found.")
         elif choice == "s":
             save_to_file(header, projects)
         elif choice == "d":
@@ -66,6 +69,7 @@ def display_filtered_by_date_projects(projects):
 
 
 def load_file():
+    """ Loads file into projects"""
     projects = []
     file_name = input("File name: ")
     in_file = open(file_name, "r")
