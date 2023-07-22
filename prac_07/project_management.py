@@ -6,6 +6,8 @@ Actual:
 """
 
 import datetime
+import operator
+
 from project import Project
 
 MENU = """(L)oad projects\n(S)ave projects\n(D)isplay projects\n(F)ilter projects by date
@@ -41,7 +43,7 @@ def main():
                 try:
                     display_filtered_by_date_projects(projects)
                 except ValueError:
-                    print("Incorrect format")
+                    print("Invalid format")
         elif choice == "a":
             try:
                 new_project = add_project()
@@ -88,7 +90,7 @@ def add_project():
     while not is_valid_input:
         try:
             start_date_string = input("Start date (dd/mm/yy): ")
-            start_date = datetime.datetime.strptime(start_date_string, "%d/%m/%Y").date()
+            start_date = datetime.datetime.strptime(start_date_string, "%d/%m/%Y").date()  # Used for error checking
             is_valid_input = True
         except ValueError:
             print("Invalid format")
@@ -96,22 +98,26 @@ def add_project():
     priority = int(input("Priority: "))
     cost_estimate = float(input("Cost estimate: $"))
     percentage_complete = int(input("Percent complete: "))
-    project = Project(name, str(start_date), priority, cost_estimate, percentage_complete)
+    project = Project(name, start_date_string, priority, cost_estimate, percentage_complete)
     return project
 
 
 def display_filtered_by_date_projects(projects):
     """Displays projects after given date"""
-    try:
-        date_string = input("Show projects that start after date (dd/mm/yy): ")  # e.g., "30/9/2022"
-        date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
-        projects_after_date = [project for project in projects if
-                               datetime.datetime.strptime(project.start_date, "%d/%m/%Y").date() > date]
-        projects_after_date.sort()
-        for project_after_date in projects_after_date:
-            print(project_after_date)
-    except ValueError:
-        print("Invalid format")
+    date_string = input("Show projects that start after date (dd/mm/yy): ")  # e.g., "30/9/2022"
+    date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+    projects_after_date = [project for project in projects if
+                           datetime.datetime.strptime(str(project.start_date), "%d/%m/%Y").date() > date]
+
+    for project_after_date in projects_after_date:
+        project_after_date.start_date = datetime.datetime.strptime(project_after_date.start_date, "%d/%m/%Y").date()
+
+    projects_after_date_sorted = sorted(projects_after_date, key=operator.attrgetter("start_date"))
+
+    for project_after_date_sorted in projects_after_date_sorted:
+        project_after_date_sorted.start_date = project_after_date_sorted.start_date.strftime("%d/%m/%Y")
+
+        print(project_after_date_sorted)
 
 
 def load_file():
@@ -135,9 +141,7 @@ def save_to_file(projects):
         out_file = open(file_name, "w")
         print(FILE_HEADER, file=out_file)
         for project in projects:
-            print(
-                f"""{project.name}\t{project.start_date}\t{project.priority}\t
-                {project.cost_estimate:.1f}\t{project.completion_percentage}""", file=out_file)
+            print(f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate:.1f}\t{project.completion_percentage}", file=out_file)
         out_file.close()
         print(f"Saved to {file_name}.")
     except FileNotFoundError:
