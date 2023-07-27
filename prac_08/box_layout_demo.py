@@ -7,6 +7,7 @@ from kivy.lang import Builder
 
 
 class BoxLayoutDemo(App):
+    """ BoxLayoutDemo is a Kivy App for greeting entered name """
     def build(self):
         """Build the Kivy GUI"""
         self.title = "Box Layout Demo"
