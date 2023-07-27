@@ -20,7 +20,7 @@ class Guitar:
         self.year = year
         self.cost = cost
 
-    def __str__(self):
+    def __repr__(self):
         """Return string representation of name, (year made) and cost of a guitar"""
         return f"{self.name} ({self.year}) : ${self.cost:,.2f}"
 
@@ -31,3 +31,7 @@ class Guitar:
     def is_vintage(self):
         """Returns if guitar is vintage if its over 50 years old"""
         return self.get_age() > 50
+
+    def __lt__(self, other):
+        """Returns if one guitar year is less than another guitars year"""
+        return self.year < other.year
