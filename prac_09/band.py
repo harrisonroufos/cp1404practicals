@@ -18,7 +18,7 @@ class Band:
         return f"{self.name} ({self.band})"
 
     def add(self, musician):
-        """Add an musician to band."""
+        """Add musician to band."""
         self.band.append(musician)
 
     def play(self):
