@@ -14,6 +14,10 @@ From doing code reviews I have learnt more about reading and understanding code 
 different ways to implement the same code in a more concise way. And with my code being reviewed I have learnt on ways to 
 reduce DRY (Don't repeat yourself).
 
+#### 2 code reviews I have done.
+- [Prac 5](https://github.com/hexhart/cp1404practicals/pull/2)
+- [Prac 7](https://github.com/HenevianAcero/cp1404practicals/pull/4)
+
 
 ### Regarding the practical tasks overall, what would you change if you were in charge of the subject?
 
